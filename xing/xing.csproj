@@ -125,6 +125,7 @@
     <Compile Include="cs\xing\tr\xing_tr_0167.cs" />
     <Compile Include="cs\xing\tr\xing_tr_8407.cs" />
     <Compile Include="cs\xing\tr\xing_tr_0425.cs" />
+    <Compile Include="cs\xing\tr\xing_tr_8413.cs" />
     <Compile Include="cs\xing\tr\xing_tr_CSPAT00800.cs" />
     <Compile Include="cs\xing\tr\xing_tr_CSPAT00700.cs" />
     <Compile Include="cs\xing\tr\xing_tr_CSPAT00600.cs" />

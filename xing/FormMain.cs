@@ -372,6 +372,9 @@ namespace xing
 				setting.mxTr1833.mfTrading = mfTrading;
 				setting.mxTr1833.mfSetting = mfSetting;
 
+                // 주식차트(일주월)
+                setting.mxTr8413 = new xing_tr_8413();
+
 				// 주식종목검색
 				setting.mxTr8430 = new xing_tr_8430();		            
 				setting.mxTr8430.mfMain = this;
@@ -426,7 +429,7 @@ namespace xing
 			Properties.Settings.Default.T0424_JSON = setting.mxTr0424.mJson.ToString();
 
             // 당일 같은 종목 재매수 세팅시 같은 종목을 무시하기 위해 값을 임시로 저장해 둠
-            Properties.Settings.Default.REBUY_JSON = setting.mxTr0424.mJson.ToString();
+            Properties.Settings.Default.REBUY_JSON = setting.mxTr0424.mRebuyJson.ToString();
 
 			Properties.Settings.Default.Save();
 
@@ -473,6 +476,9 @@ namespace xing
 
 			// 잔고정보 유지할 수 있도록 값을 임시로 저장해 둠
 			Properties.Settings.Default.T0424_JSON = setting.mxTr0424.mJson.ToString();
+
+            // 당일 같은 종목 재매수 세팅시 같은 종목을 무시하기 위해 값을 임시로 저장해 둠
+            Properties.Settings.Default.REBUY_JSON = setting.mxTr0424.mRebuyJson.ToString();
 
 			Properties.Settings.Default.Save();
 

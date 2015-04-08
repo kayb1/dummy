@@ -186,6 +186,9 @@ namespace xing
 		/// <summary>종목검색(씽API용)</summary>
 		public static xing_tr_1833 mxTr1833;
 
+        /// <summary>주식차트(일주월)</summary>
+        public static xing_tr_8413 mxTr8413;
+
 		/// <summary>주식종목조회</summary>
 		public static xing_tr_8430 mxTr8430;
 

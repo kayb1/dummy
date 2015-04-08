@@ -757,5 +757,35 @@ namespace xing.Properties {
                 this["SELL_HALF"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string T1833_JSON
+        {
+            get
+            {
+                return ((string)(this["T1833_JSON"]));
+            }
+            set
+            {
+                this["T1833_JSON"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20140414")]
+        public string T1833_DATE
+        {
+            get
+            {
+                return ((string)(this["T1833_DATE"]));
+            }
+            set
+            {
+                this["T1833_DATE"] = value;
+            }
+        }
     }
 }

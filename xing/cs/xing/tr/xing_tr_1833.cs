@@ -58,7 +58,10 @@ namespace xing
 		private bool mStateRun = false;
 
 		/// <summary>현재 TR이 실행중일 동안 카운트 수</summary>
-		private int mStateRunCount = 0;	
+		private int mStateRunCount = 0;
+
+        /// <summary>당일 종목별 계산 정보들(한번만 계산) - {종목코드:"60고가","60저가" ... }</summary>
+        public JsonObjectCollection mT1833Json;	
 
 		/// <summary>
 		/// 생성자 - 종목검색
@@ -100,7 +103,43 @@ namespace xing
 			}
 
 			#endregion
-		}	// end function
+
+            #region 1833 종목 검색후 당일 종목마다 가지고 있어야할 종목 정보 처리
+
+            string date_saved = Properties.Settings.Default.T1833_DATE;
+            string date_now = util_datetime.GetFormatNow("yyyyMMdd");
+
+            // 오늘 프로그램이 실행된적이 있다면...
+            if (date_now == date_saved)
+            {
+                // 설정파일에 저장된 값을 로딩				
+                try
+                {
+                    mT1833Json = (JsonObjectCollection)new JsonTextParser().Parse(Properties.Settings.Default.T1833_JSON);
+                }
+                // 설정 파일에 잘못된 json 값이 들어가 있을 경우 예외 처리
+                catch (Exception ex)
+                {
+                    // json 초기화
+                    mT1833Json = new JsonObjectCollection();
+
+                    Log.WriteLine("t1833 종목 계산 정보 json 초기화 :: " + ex.Message);
+                }
+            }
+            // 오늘 처음 실행되는 것이라면..
+            else
+            {
+                // json 초기화
+                mT1833Json = new JsonObjectCollection();
+
+                // 설정파일에 금일 날짜값 저장
+                Properties.Settings.Default.T1833_DATE = date_now;
+                Properties.Settings.Default.Save();
+            }
+
+            #endregion
+        
+        }	// end function
 
 
 		/// <summary>
@@ -212,6 +251,18 @@ namespace xing
                             mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.BackColor = System.Drawing.Color.LightSkyBlue;
                         }
                     }
+                }
+
+                try
+                {
+                    // 주식 차트 요청
+                    setting.mxTr8413.call_request(mTr.GetFieldData("t1833OutBlock1", "shcode", 0));
+                    Log.WriteLine("주식차트 요청");
+                }
+                catch (Exception ex)
+                {
+                    Log.WriteLine(ex.Message);
+                    Log.WriteLine(ex.StackTrace);
                 }
 
                 if (!mfTrading.ButtonAutoBuyStart.Enabled)
