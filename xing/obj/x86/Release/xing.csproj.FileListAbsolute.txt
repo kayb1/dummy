@@ -1,0 +1,108 @@
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\bin\x86\Release\xing.exe.config
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\bin\x86Release\xing.exe.config
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\bin\x86Release\xing.exe
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\bin\x86Release\xing.pdb
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\bin\x86Release\Interop.XA_DATASETLib.dll
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\bin\x86Release\Interop.XA_SESSIONLib.dll
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\Interop.XA_DATASETLib.dll
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\Interop.XA_SESSIONLib.dll
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.csproj.ResolveComReference.cache
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.cs.form.FormLog.resources
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.cs.form.FormLogin.resources
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.cs.form.FormSetting.resources
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.cs.form.FormTrading.resources
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.FormMain.resources
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.Properties.Resources.resources
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.csproj.GenerateResource.Cache
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.exe
+D:\doc\03.API\09.샘플공유이벤트\고객샘플\07.정영욱@\xing_20140702+(2)\xing\obj\x86\Release\xing.pdb
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\bin\x86Release\xing.exe.config
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\Interop.XA_DATASETLib.dll
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\Interop.XA_SESSIONLib.dll
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.csproj.ResolveComReference.cache
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.exe
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.pdb
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.csprojResolveAssemblyReference.cache
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.cs.form.FormLog.resources
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.cs.form.FormLogin.resources
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.cs.form.FormSetting.resources
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.cs.form.FormTrading.resources
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.FormMain.resources
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.Properties.Resources.resources
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\obj\x86\Release\xing.csproj.GenerateResource.Cache
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\bin\x86Release\xing.exe
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\bin\x86Release\xing.pdb
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\bin\x86Release\Interop.XA_DATASETLib.dll
+C:\Users\Unknown\Desktop\xing\xing_20140702(2)_x86[0]\xing\bin\x86Release\Interop.XA_SESSIONLib.dll
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\xing.exe.config
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\Interop.XA_DATASETLib.dll
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\Interop.XA_SESSIONLib.dll
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.csproj.ResolveComReference.cache
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.exe
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.pdb
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\xing.exe
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\xing.pdb
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\Interop.XA_DATASETLib.dll
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\Interop.XA_SESSIONLib.dll
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.csprojResolveAssemblyReference.cache
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.cs.form.FormLog.resources
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.cs.form.FormLogin.resources
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.cs.form.FormSetting.resources
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.cs.form.FormTrading.resources
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.FormMain.resources
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.Properties.Resources.resources
+C:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.csproj.GenerateResource.Cache
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\xing.exe.config
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\Interop.XA_DATASETLib.dll
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\Interop.XA_SESSIONLib.dll
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.csproj.ResolveComReference.cache
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.exe
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.pdb
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\xing.exe
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\xing.pdb
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\Interop.XA_DATASETLib.dll
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\bin\x86Release\Interop.XA_SESSIONLib.dll
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.csprojResolveAssemblyReference.cache
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.cs.form.FormLog.resources
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.cs.form.FormLogin.resources
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.cs.form.FormSetting.resources
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.cs.form.FormTrading.resources
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.FormMain.resources
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.Properties.Resources.resources
+C:\Users\Unknown\Desktop\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\obj\x86\Release\xing.csproj.GenerateResource.Cache
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\xing.exe.config
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\Interop.XA_DATASETLib.dll
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\Interop.XA_SESSIONLib.dll
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.csproj.ResolveComReference.cache
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.exe
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.pdb
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\xing.exe
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\xing.pdb
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\Interop.XA_DATASETLib.dll
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\Interop.XA_SESSIONLib.dll
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.csprojResolveAssemblyReference.cache
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.cs.form.FormLog.resources
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.cs.form.FormLogin.resources
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.cs.form.FormSetting.resources
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.cs.form.FormTrading.resources
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.FormMain.resources
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.Properties.Resources.resources
+C:\Users\Unknown\Desktop\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.csproj.GenerateResource.Cache
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\xing.exe.config
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\Interop.XA_DATASETLib.dll
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\Interop.XA_SESSIONLib.dll
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.csproj.ResolveComReference.cache
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.exe
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.pdb
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\xing.exe
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\xing.pdb
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\Interop.XA_DATASETLib.dll
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\bin\x86Release\Interop.XA_SESSIONLib.dll
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.csprojResolveAssemblyReference.cache
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.cs.form.FormLog.resources
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.cs.form.FormLogin.resources
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.cs.form.FormSetting.resources
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.cs.form.FormTrading.resources
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.FormMain.resources
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.Properties.Resources.resources
+C:\Users\sdfsdf\Desktop\xing_자동매매프로그램v0.0.1_20150407\xing\obj\x86\Release\xing.csproj.GenerateResource.Cache

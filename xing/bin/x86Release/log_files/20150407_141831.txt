@@ -1,0 +1,60 @@
+14:18:31.200 :: ##### 프로그램 시작 #####
+14:18:31.503 :: JIF :: 21-장 시작
+14:18:31.685 :: 자동 로그인 시작
+14:18:36.690 :: 로그인 시도..!!
+14:18:37.263 :: 0000 :: 로그인 성공
+14:18:37.521 :: t8430 :: 종목 기본 정보 저장 완료..!!
+14:18:37.522 :: t8430 :: 시간 검색 타이머 구동
+14:18:37.523 :: JIF :: 장 운영정보 실시간 접수 등록
+14:18:37.526 :: JIF :: HTS -> API 연동 해제
+14:18:37.527 :: 자동거래 중지..!!
+14:18:39.112 :: 자동거래 시작..!!
+14:18:40.338 :: 입력 문자열의 형식이 잘못되었습니다.
+14:18:40.346 ::    위치: System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   위치: System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   위치: System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   위치: System.Convert.ToInt32(Object value)
+   위치: xing.xing_tr_1833.XA_DATASETLib._IXAQueryEvents.ReceiveData(String szTrCode) 파일 c:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\cs\xing\tr\xing_tr_1833.cs:줄 202
+14:18:45.903 :: 입력 문자열의 형식이 잘못되었습니다.
+14:18:45.907 ::    위치: System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   위치: System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   위치: System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   위치: System.Convert.ToInt32(Object value)
+   위치: xing.xing_tr_1833.XA_DATASETLib._IXAQueryEvents.ReceiveData(String szTrCode) 파일 c:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\cs\xing\tr\xing_tr_1833.cs:줄 202
+14:18:51.398 :: 입력 문자열의 형식이 잘못되었습니다.
+14:18:51.402 ::    위치: System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   위치: System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   위치: System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   위치: System.Convert.ToInt32(Object value)
+   위치: xing.xing_tr_1833.XA_DATASETLib._IXAQueryEvents.ReceiveData(String szTrCode) 파일 c:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\cs\xing\tr\xing_tr_1833.cs:줄 202
+14:18:56.968 :: 입력 문자열의 형식이 잘못되었습니다.
+14:18:56.975 ::    위치: System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   위치: System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   위치: System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   위치: System.Convert.ToInt32(Object value)
+   위치: xing.xing_tr_1833.XA_DATASETLib._IXAQueryEvents.ReceiveData(String szTrCode) 파일 c:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\cs\xing\tr\xing_tr_1833.cs:줄 202
+14:19:02.460 :: 입력 문자열의 형식이 잘못되었습니다.
+14:19:02.464 ::    위치: System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   위치: System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   위치: System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   위치: System.Convert.ToInt32(Object value)
+   위치: xing.xing_tr_1833.XA_DATASETLib._IXAQueryEvents.ReceiveData(String szTrCode) 파일 c:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\cs\xing\tr\xing_tr_1833.cs:줄 202
+14:19:08.046 :: 입력 문자열의 형식이 잘못되었습니다.
+14:19:08.048 ::    위치: System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   위치: System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   위치: System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   위치: System.Convert.ToInt32(Object value)
+   위치: xing.xing_tr_1833.XA_DATASETLib._IXAQueryEvents.ReceiveData(String szTrCode) 파일 c:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\cs\xing\tr\xing_tr_1833.cs:줄 202
+14:19:13.600 :: 입력 문자열의 형식이 잘못되었습니다.
+14:19:13.603 ::    위치: System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   위치: System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   위치: System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   위치: System.Convert.ToInt32(Object value)
+   위치: xing.xing_tr_1833.XA_DATASETLib._IXAQueryEvents.ReceiveData(String szTrCode) 파일 c:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\cs\xing\tr\xing_tr_1833.cs:줄 202
+14:19:19.090 :: 입력 문자열의 형식이 잘못되었습니다.
+14:19:19.093 ::    위치: System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   위치: System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   위치: System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   위치: System.Convert.ToInt32(Object value)
+   위치: xing.xing_tr_1833.XA_DATASETLib._IXAQueryEvents.ReceiveData(String szTrCode) 파일 c:\Users\sdfsdf\Desktop\xing_20140702(2)_x86[0] - 복사본\xing\cs\xing\tr\xing_tr_1833.cs:줄 202
+14:19:20.268 :: ##### 프로그램 종료 #####
