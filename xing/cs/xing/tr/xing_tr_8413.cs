@@ -41,32 +41,36 @@ namespace xing
             {
                 String shcode = mTr.GetFieldData("t8413OutBlock", "shcode", 0);
 
-                int highPrice = 0;
-                int lowPrice = 99999999;
-                int iCount = mTr.GetBlockCount("t8413OutBlock1");
-                for (int i = 0; i < iCount - 1; i++) // 당일 봉 무시
+                if (setting.mxTr1833.mT1833Json[shcode] == null)
                 {
-					String date = mTr.GetFieldData("t8413OutBlock1", "date", i);
-                    String high = mTr.GetFieldData("t8413OutBlock1", "high", i);
-                    String low = mTr.GetFieldData("t8413OutBlock1", "low", i);
-
-                    int realHigh = Convert.ToInt32(high);
-                    int realLow = Convert.ToInt32(low);
-                    if (highPrice < realHigh) // 고가 갱신
+                    int highPrice = 0;
+                    int lowPrice = 99999999;
+                    int iCount = mTr.GetBlockCount("t8413OutBlock1");
+                    for (int i = 0; i < iCount - 1; i++) // 당일 봉 무시
                     {
-                        highPrice = realHigh;
-                    }
-                    if (lowPrice > realLow) // 저가 갱신
-                    {
-                        lowPrice = realLow;
-                    }
-                    Log.WriteLine("t8413 :: 종목 차트 일봉 데이타 수신 " + iCount + " " + date + " " + high + " " + low);
-                }	// end for
+					    String date = mTr.GetFieldData("t8413OutBlock1", "date", i);
+                        String high = mTr.GetFieldData("t8413OutBlock1", "high", i);
+                        String low = mTr.GetFieldData("t8413OutBlock1", "low", i);
 
-                Log.WriteLine("t8413 :: 종목 차트 일봉 데이타 60봉고가/저가 " + " " + highPrice + " " + lowPrice);
-                if (setting.mxTr1833.mT1833Json[shcode] == null) 
-                {
-                    setting.mxTr1833.mT1833Json.Add(new JsonStringValue(shcode, highPrice.ToString() + "|" + lowPrice.ToString()));
+                        int realHigh = Convert.ToInt32(high);
+                        int realLow = Convert.ToInt32(low);
+                        if (highPrice < realHigh) // 고가 갱신
+                        {
+                            highPrice = realHigh;
+                        }
+                        if (lowPrice > realLow) // 저가 갱신
+                        {
+                            lowPrice = realLow;
+                        }
+                        //Log.WriteLine("t8413 :: 종목 차트 일봉 데이타 수신 " + iCount + " " + date + " " + high + " " + low);
+                    }	// end for
+
+                    int dayOpen = Convert.ToInt32(mTr.GetFieldData("t8413OutBlock", "disiga", 0));
+                    //int dayClose = Convert.ToInt32(mTr.GetFieldData("t8413OutBlock", "diclose", 0));
+
+                    //Log.WriteLine("t8413 :: 종목 차트 일봉 데이타 60봉고가/저가 " + " " + shcode + " " + highPrice + " " + lowPrice + " " + p236 + " " + p382 + " " + p50 + " " + p618 + " " + isPibonacci);
+//                    setting.mxTr1833.mT1833Json.Add(new JsonStringValue(shcode, highPrice.ToString() + "|" + lowPrice.ToString() + "|" + isPibonacci.ToString()));
+                    setting.mxTr1833.mT1833Json.Add(new JsonStringValue(shcode, highPrice.ToString() + "|" + lowPrice.ToString() + "|" + dayOpen.ToString()));
                 }
             }
             catch (Exception ex)
@@ -108,9 +112,9 @@ namespace xing
 		{
             mTr.SetFieldData("t8413InBlock", "shcode", 0, shcode);
             mTr.SetFieldData("t8413InBlock", "gubun", 0, "2"); // 일
-            mTr.SetFieldData("t8413InBlock", "qrycnt", 0, "60"); // 60일
+            mTr.SetFieldData("t8413InBlock", "qrycnt", 0, "137"); // 137일
             mTr.SetFieldData("t8413InBlock", "sdate", 0, " ");
-            mTr.SetFieldData("t8413InBlock", "edate", 0, "당일"); // 당일 포함 60일 가져옴
+            mTr.SetFieldData("t8413InBlock", "edate", 0, "당일"); // 당일 포함 137일 가져옴
             mTr.SetFieldData("t8413InBlock", "cts_date", 0, " ");
             mTr.SetFieldData("t8413InBlock", "comp_yn", 0, "N"); // 압축 x
 

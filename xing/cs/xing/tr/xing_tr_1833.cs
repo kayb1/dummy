@@ -61,7 +61,7 @@ namespace xing
 		private int mStateRunCount = 0;
 
         /// <summary>당일 종목별 계산 정보들(한번만 계산) - {종목코드:"60고가","60저가" ... }</summary>
-        public JsonObjectCollection mT1833Json;	
+        public JsonObjectCollection mT1833Json;
 
 		/// <summary>
 		/// 생성자 - 종목검색
@@ -162,281 +162,35 @@ namespace xing
 				// 파일명에서 매수/매도 구분값 가져옴
 				string divide = mFileName.Substring(3, 2);
 
-                for (int i = 0; i < iCount; i++)
+                // 파일명에서 이름 구분값 가져옴
+                string logicName = mFileName.Substring(6, 4);
+                if (String.Compare(logicName, "피보나치") == 0)
                 {
-                    string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
-                    string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
-                    string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
-                    string volume = mTr.GetFieldData("t1833OutBlock1", "volume", i);
-                    string diff = mTr.GetFieldData("t1833OutBlock1", "diff", i);
-
-                    // json에 저장된 종목정보 가져 옴
-                    JsonObject obj = mJson[shcode];
-
-                    // json에 종목정보가 없으면 추가
-                    if (obj == null)
-                    {
-                        mJson.Add(new JsonStringValue(shcode, volume));
-
-                        // 종목검색 그리드에 표시
-                        string[] row = new string[mfTrading.GridBuy.ColumnCount];
-                        for (int j = 0; j < row.Length; j++)
-                        {
-                            row[j] = "0";
-                        }
-                        row[Convert.ToInt32(mfTrading.mhBuyList["종목코드"].GetValue())] = shcode;
-                        row[Convert.ToInt32(mfTrading.mhBuyList["종목명"].GetValue())] = hname;
-                        row[Convert.ToInt32(mfTrading.mhBuyList["현재가"].GetValue())] = Util.GetNumberFormat(close);
-                        row[Convert.ToInt32(mfTrading.mhBuyList["등락율"].GetValue())] = Util.GetNumberFormat2(diff);
-                        row[Convert.ToInt32(mfTrading.mhBuyList["검색가"].GetValue())] = Util.GetNumberFormat(close);
-                        row[Convert.ToInt32(mfTrading.mhBuyList["검색등락율"].GetValue())] = Util.GetNumberFormat2(diff);
-
-                        mfTrading.GridBuy.Rows.Add(row);
-                    }
-                    // 있으면 현재 검색된 기준으로 변경
-                    else
-                    {
-                        if (volume == obj.GetValue().ToString())
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            ((JsonStringValue)obj).Value = volume;
-                        }
-                    }
-                }
-
-                for (int iRow = 0; iRow < mfTrading.GridBuy.Rows.Count; iRow++)
-                {
-                    bool isExist = false;
-                    string curHname = mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["종목명"].GetValue())].Value.ToString();
-                    string tempPrice = "";
-                    string tempRate = "";
                     for (int i = 0; i < iCount; i++)
                     {
                         string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
                         string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
-                        string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
-                        string diff = mTr.GetFieldData("t1833OutBlock1", "diff", i);
-
-                        if (string.Compare(curHname, hname) == 0)
+                        if (mT1833Json[shcode] == null)
                         {
-                            isExist = true;
-                            tempPrice = close;
-                            tempRate = diff;
+                            try
+                            {
+                                // 주식 차트 요청
+                                setting.mxTr8413.call_request(shcode);
+                                //Log.WriteLine("주식차트 요청 " + hname + " " + shcode);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.WriteLine(ex.Message);
+                                Log.WriteLine(ex.StackTrace);
+                            }
+
                             break;
                         }
                     }
-
-                    if (!isExist)
-                    {
-                        mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.ForeColor = System.Drawing.Color.Salmon;
-                        mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.BackColor = System.Drawing.Color.White;
-                    }
-                    else
-                    {   // 존재할때 기존 종목 현재가와 등락율 갱신
-                        mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["현재가"].GetValue())].Value = Util.GetNumberFormat(tempPrice);
-                        mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["등락율"].GetValue())].Value = Util.GetNumberFormat2(tempRate);
-                        mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
-
-                        double tempCur = Convert.ToDouble(mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["등락율"].GetValue())].Value);
-                        double tempFirst = Convert.ToDouble(mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["검색등락율"].GetValue())].Value);
-                        if (tempCur > tempFirst) // 검색출현때보다 올라있으면 빨간배경
-                        {
-                            mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.BackColor = System.Drawing.Color.PeachPuff;
-                        }
-                        else if (tempCur < tempFirst) // 검색출현때보다 내려있으면 하늘배경
-                        {
-                            mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.BackColor = System.Drawing.Color.LightSkyBlue;
-                        }
-                    }
                 }
 
-                try
-                {
-                    // 주식 차트 요청
-                    setting.mxTr8413.call_request(mTr.GetFieldData("t1833OutBlock1", "shcode", 0));
-                    Log.WriteLine("주식차트 요청");
-                }
-                catch (Exception ex)
-                {
-                    Log.WriteLine(ex.Message);
-                    Log.WriteLine(ex.StackTrace);
-                }
+                shBuyAndSell(iCount, divide, iCost100, logicName);
 
-                if (!mfTrading.ButtonAutoBuyStart.Enabled)
-                {
-                    for (int i = 0; i < iCount; i++)
-                    {
-                        string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
-                        string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
-                        string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
-                        string volume = mTr.GetFieldData("t1833OutBlock1", "volume", i);
-
-                        // 일괄 매도중이면.. 패쓰~~
-                        // 매수 종목된 항목 정보는 보기 위해 continue 사용
-                        if (mfTrading.CheckSellAll.Checked == true)
-                        {
-                            continue;
-                        }
-
-                        #region 매수 주문
-                        if (divide == "매수")
-                        {
-                            // 보유종목 당일 청산
-                            if (setting.sell_today_yn)
-                            {
-                                if (setting.mxTr0167.mTimeCur >= 144858)
-                                {
-                                    continue;
-                                }
-                            }
-
-                            // 당일 목표 달성
-                            if (setting.buy_max_yn)
-                            {
-                                // 수익율 상/하양 값이 목표값 이상이면..패쓰~~~
-                                if (Math.Abs(setting.mxTr0424.mAccountRate) > setting.buy_max)
-                                {
-                                    Log.WriteLine("당일 최고/최저 목표 초과..!!");
-                                    continue;
-                                }
-                            }
-                            Log.WriteLine("당일 재매수 여부:" + setting.buy_rebuy_yn + " 당일 매수된 종목수:" + setting.mxTr0424.mRebuyJson.Count);
-                            // 매수 시간 지정 사용
-                            if (setting.buy_time_yn)
-                            {
-                                // JIF 에서 장시작 시간이 지정된 경우
-                                if (setting.mxRealJif.mTimeStart21 > 0)
-                                {
-                                    // 현재 시간이 설정값 보다 크면 패쓰~~
-                                    if (setting.mxTr0167.mTimeCur > (setting.mxRealJif.mTimeStart21 + (setting.buy_time * 10000)))
-                                    {
-                                        Log.WriteLine("JIF == TRUE :: 매수 가능 시간이 지났습니다..!!");
-                                        continue;
-                                    }
-                                }
-                                else
-                                {
-                                    // 현재 시간이 설정값 보다 크면 패쓰~~
-                                    if (setting.mxTr0167.mTimeCur > (90000 + (setting.buy_time * 10000)))
-                                    {
-                                        Log.WriteLine("JIF == FALSE :: 매수 가능 시간이 지났습니다..!!");
-                                        continue;
-                                    }
-                                }
-                            }
-
-                            // 미수 주문일 경우
-                            if (setting.buy_misu_yn)
-                            {
-                                if (iCount == 1)
-                                {
-                                    setting.mxTrCSPBQ00200.call_request(shcode, close);
-                                }
-                            }
-                            // 미수 주문이 아닐 경우 - 증거금 100% 기준
-                            else
-                            {
-                                // 중복 매수 불가능한 상태
-                                if (setting.buy_duplicate_yn == false)
-                                {
-                                    // 잔고에 종목이 있다면 패쓰~~
-                                    if (setting.mxTr0424.mJson[shcode] != null)
-                                    {
-                                        continue;
-                                    }
-                                }
-
-                                // 당일 같은 종목 재매수 불가능한 상태
-                                if (setting.buy_rebuy_yn == false)
-                                {
-                                    // 당일에 한번 샀던 종목이 있다면 패쓰~~
-                                    if (setting.mxTr0424.mRebuyJson[shcode] != null)
-                                    {
-                                        continue;
-                                    }
-                                }
-
-                                // 증거금 100% 매입가능 금액 세팅
-                                double price = iCost100;
-
-                                // 매수 금액 지정 값 사용 여부
-                                if (setting.buy_cost_yn)
-                                {
-                                    if (price > setting.buy_cost)
-                                    {
-                                        price = setting.buy_cost;
-                                    }
-                                }
-
-                                // 추정자산 1/n 금액 사용 여부
-                                if (setting.buy_count_yn)
-                                {
-                                    double price_count = Convert.ToDouble(mfTrading.TextSunamt.Text.Replace(",", "")) / setting.buy_count;
-
-                                    // 매수 금액 지정 값이 없으면 추정자산 기준 1/n 값을 세팅
-                                    if (price > price_count)
-                                    {
-                                        price = price_count;
-                                    }
-                                }
-
-                                // 매수 가능 수량 계산
-                                int quantity = (int)(price / Convert.ToInt32(close));
-
-                                // 매매단위에 맞도록 수량 재계산
-                                int memedan = Convert.ToInt32(setting.mxTr8430.mJson[shcode].GetValue());
-
-                                quantity = (int)(Math.Truncate((double)quantity / memedan) * memedan);
-
-                                // 매수 진행
-                                if (quantity > 0)
-                                {
-                                    iCost100 -= quantity * Convert.ToDouble(close);
-
-                                    setting.mxTrCSPAT00600.call_request(shcode, quantity.ToString(), close, "2", "[매수]", hname);
-                                }
-                            }
-                        }
-                        #endregion
-
-                        #region 매도 주문
-                        else if (divide == "매도")
-                        {
-                            for (int iRow = 0; iRow < mfTrading.GridAccount.Rows.Count; iRow++)
-                            {
-                                if (shcode == mfTrading.GridAccount.Rows[iRow].Cells[0].Value.ToString())
-                                {
-                                    string quantity = mfTrading.GridAccount.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhAccount["수량"].GetValue())].Value.ToString();
-
-                                    if (quantity != "0")
-                                    {
-                                        string rate = mfTrading.GridAccount.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhAccount["수익율"].GetValue())].Value.ToString();
-
-                                        // 종목검색 매도 옵션 사용 유무
-                                        if (setting.sell_1833_yn)
-                                        {
-                                            if (setting.sell_fix_buffer <= Convert.ToDouble(rate))
-                                            {
-                                                setting.mxTrCSPAT00600.call_request(shcode, quantity, close, "1", "[매도] 종목검색[이익실현] :: " + mFileName, hname);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            setting.mxTrCSPAT00600.call_request(shcode, quantity, close, "1", "[매도] 종목검색[단순] :: " + mFileName, hname);
-                                        }
-                                    }
-
-                                    break;
-                                }
-                            }
-                        }
-                        #endregion
-                    }	// end for
-                }
-				
 				// 다시 실행가능하도록 초기화
 				mStateRun = false;
 				mStateRunCount = 0;
@@ -568,5 +322,317 @@ namespace xing
 				}
 			}
 		}	// end function
+
+        private void shBuyAndSell(int iCount, string divide, double iCost100, string logicName)
+        {
+            for (int i = 0; i < iCount; i++)
+            {
+                string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
+                string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
+                string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
+                string volume = mTr.GetFieldData("t1833OutBlock1", "volume", i);
+                string diff = mTr.GetFieldData("t1833OutBlock1", "diff", i);
+
+                if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] == null)
+                {
+                    continue;
+                }
+                else if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] != null)
+                {
+                    string[] arr1833 = mT1833Json[shcode].GetValue().ToString().Split('|');
+                    int high = Convert.ToInt32(arr1833[0]);
+                    int low = Convert.ToInt32(arr1833[1]);
+                    int realOpen = Convert.ToInt32(arr1833[2]);
+
+                    // 피보나치 되돌림
+                    double p236 = (double)high - (double)(high - low) * 0.236;
+                    double p382 = (double)high - (double)(high - low) * 0.382;
+                    double p50 = (double)high - (double)(high - low) * 0.5;
+                    double p618 = (double)high - (double)(high - low) * 0.618;
+
+                    int realClose = Convert.ToInt32(close);
+                    bool isPibonacci = false;
+                    if (realOpen > realClose && ((realOpen > p236 * 1.01 && realClose < p236 * 1.003) ||
+                        (realOpen > p382 * 1.01 && realClose < p382 * 1.003) ||
+                        (realOpen > p50 * 1.01 && realClose < p50 * 1.003) ||
+                        (realOpen > p618 * 1.01 && realClose < p618 * 1.003)))
+                    {
+                        //Log.WriteLine("t1833 주문가능 " + hname + " " + shcode + " " + high + " " + low + " " + realOpen + " " + realClose + " " + (p236 * 1.003) + " " + (p382 * 1.003) + " " + (p50 * 1.003) + " " + (p618 * 1.003));
+                        isPibonacci = true;
+                    }
+
+                    //Log.WriteLine("t1833 주문가능 " + hname + " " + shcode + " " + high + " " + low + " " + close + " " + isPibo);
+
+                    if (!isPibonacci)
+                    {
+                        continue;
+                    }
+                }
+
+                // json에 저장된 종목정보 가져 옴
+                JsonObject obj = mJson[shcode];
+
+                // json에 종목정보가 없으면 추가
+                if (obj == null)
+                {
+                    mJson.Add(new JsonStringValue(shcode, volume));
+
+                    // 종목검색 그리드에 표시
+                    string[] row = new string[mfTrading.GridBuy.ColumnCount];
+                    for (int j = 0; j < row.Length; j++)
+                    {
+                        row[j] = "0";
+                    }
+                    row[Convert.ToInt32(mfTrading.mhBuyList["종목코드"].GetValue())] = shcode;
+                    row[Convert.ToInt32(mfTrading.mhBuyList["종목명"].GetValue())] = hname;
+                    row[Convert.ToInt32(mfTrading.mhBuyList["현재가"].GetValue())] = Util.GetNumberFormat(close);
+                    row[Convert.ToInt32(mfTrading.mhBuyList["등락율"].GetValue())] = Util.GetNumberFormat2(diff);
+                    row[Convert.ToInt32(mfTrading.mhBuyList["검색가"].GetValue())] = Util.GetNumberFormat(close);
+                    row[Convert.ToInt32(mfTrading.mhBuyList["검색등락율"].GetValue())] = Util.GetNumberFormat2(diff);
+
+                    mfTrading.GridBuy.Rows.Add(row);
+                }
+                // 있으면 현재 검색된 기준으로 변경
+                else
+                {
+                    if (volume == obj.GetValue().ToString())
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        ((JsonStringValue)obj).Value = volume;
+                    }
+                }
+            }
+
+            for (int iRow = 0; iRow < mfTrading.GridBuy.Rows.Count; iRow++)
+            {
+                bool isExist = false;
+                string curHname = mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["종목명"].GetValue())].Value.ToString();
+                string tempPrice = "";
+                string tempRate = "";
+                for (int i = 0; i < iCount; i++)
+                {
+                    string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
+                    string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
+                    string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
+                    string diff = mTr.GetFieldData("t1833OutBlock1", "diff", i);
+
+                    if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] == null)
+                    {
+                        continue;
+                    }
+
+                    if (string.Compare(curHname, hname) == 0)
+                    {
+                        isExist = true;
+                        tempPrice = close;
+                        tempRate = diff;
+                        break;
+                    }
+                }
+
+                if (!isExist)
+                {
+                    mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.ForeColor = System.Drawing.Color.Salmon;
+                    mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                }
+                else
+                {   // 존재할때 기존 종목 현재가와 등락율 갱신
+                    mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["현재가"].GetValue())].Value = Util.GetNumberFormat(tempPrice);
+                    mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["등락율"].GetValue())].Value = Util.GetNumberFormat2(tempRate);
+                    mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+
+                    double tempCur = Convert.ToDouble(mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["등락율"].GetValue())].Value);
+                    double tempFirst = Convert.ToDouble(mfTrading.GridBuy.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhBuyList["검색등락율"].GetValue())].Value);
+                    if (tempCur > tempFirst) // 검색출현때보다 올라있으면 빨간배경
+                    {
+                        mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.BackColor = System.Drawing.Color.PeachPuff;
+                    }
+                    else if (tempCur < tempFirst) // 검색출현때보다 내려있으면 하늘배경
+                    {
+                        mfTrading.GridBuy.Rows[iRow].DefaultCellStyle.BackColor = System.Drawing.Color.LightSkyBlue;
+                    }
+                }
+            }
+
+            if (!mfTrading.ButtonAutoBuyStart.Enabled)
+            {
+                for (int i = 0; i < iCount; i++)
+                {
+                    string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
+                    string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
+                    string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
+                    string volume = mTr.GetFieldData("t1833OutBlock1", "volume", i);
+
+                    if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] == null)
+                    {
+                        continue;
+                    }
+
+                    // 일괄 매도중이면.. 패쓰~~
+                    // 매수 종목된 항목 정보는 보기 위해 continue 사용
+                    if (mfTrading.CheckSellAll.Checked == true)
+                    {
+                        continue;
+                    }
+
+                    #region 매수 주문
+                    if (divide == "매수")
+                    {
+                        // 보유종목 당일 청산
+                        if (setting.sell_today_yn)
+                        {
+                            if (setting.mxTr0167.mTimeCur >= 144858)
+                            {
+                                continue;
+                            }
+                        }
+
+                        // 당일 목표 달성
+                        if (setting.buy_max_yn)
+                        {
+                            // 수익율 상/하양 값이 목표값 이상이면..패쓰~~~
+                            if (Math.Abs(setting.mxTr0424.mAccountRate) > setting.buy_max)
+                            {
+                                Log.WriteLine("당일 최고/최저 목표 초과..!!");
+                                continue;
+                            }
+                        }
+                        Log.WriteLine("당일 재매수 여부:" + setting.buy_rebuy_yn + " 당일 매수된 종목수:" + setting.mxTr0424.mRebuyJson.Count);
+                        // 매수 시간 지정 사용
+                        if (setting.buy_time_yn)
+                        {
+                            // JIF 에서 장시작 시간이 지정된 경우
+                            if (setting.mxRealJif.mTimeStart21 > 0)
+                            {
+                                // 현재 시간이 설정값 보다 크면 패쓰~~
+                                if (setting.mxTr0167.mTimeCur > (setting.mxRealJif.mTimeStart21 + (setting.buy_time * 10000)))
+                                {
+                                    Log.WriteLine("JIF == TRUE :: 매수 가능 시간이 지났습니다..!!");
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                // 현재 시간이 설정값 보다 크면 패쓰~~
+                                if (setting.mxTr0167.mTimeCur > (90000 + (setting.buy_time * 10000)))
+                                {
+                                    Log.WriteLine("JIF == FALSE :: 매수 가능 시간이 지났습니다..!!");
+                                    continue;
+                                }
+                            }
+                        }
+
+                        // 미수 주문일 경우
+                        if (setting.buy_misu_yn)
+                        {
+                            if (iCount == 1)
+                            {
+                                setting.mxTrCSPBQ00200.call_request(shcode, close);
+                            }
+                        }
+                        // 미수 주문이 아닐 경우 - 증거금 100% 기준
+                        else
+                        {
+                            // 중복 매수 불가능한 상태
+                            if (setting.buy_duplicate_yn == false)
+                            {
+                                // 잔고에 종목이 있다면 패쓰~~
+                                if (setting.mxTr0424.mJson[shcode] != null)
+                                {
+                                    continue;
+                                }
+                            }
+
+                            // 당일 같은 종목 재매수 불가능한 상태
+                            if (setting.buy_rebuy_yn == false)
+                            {
+                                // 당일에 한번 샀던 종목이 있다면 패쓰~~
+                                if (setting.mxTr0424.mRebuyJson[shcode] != null)
+                                {
+                                    continue;
+                                }
+                            }
+
+                            // 증거금 100% 매입가능 금액 세팅
+                            double price = iCost100;
+
+                            // 매수 금액 지정 값 사용 여부
+                            if (setting.buy_cost_yn)
+                            {
+                                if (price > setting.buy_cost)
+                                {
+                                    price = setting.buy_cost;
+                                }
+                            }
+
+                            // 추정자산 1/n 금액 사용 여부
+                            if (setting.buy_count_yn)
+                            {
+                                double price_count = Convert.ToDouble(mfTrading.TextSunamt.Text.Replace(",", "")) / setting.buy_count;
+
+                                // 매수 금액 지정 값이 없으면 추정자산 기준 1/n 값을 세팅
+                                if (price > price_count)
+                                {
+                                    price = price_count;
+                                }
+                            }
+
+                            // 매수 가능 수량 계산
+                            int quantity = (int)(price / Convert.ToInt32(close));
+
+                            // 매매단위에 맞도록 수량 재계산
+                            int memedan = Convert.ToInt32(setting.mxTr8430.mJson[shcode].GetValue());
+
+                            quantity = (int)(Math.Truncate((double)quantity / memedan) * memedan);
+
+                            // 매수 진행
+                            if (quantity > 0)
+                            {
+                                iCost100 -= quantity * Convert.ToDouble(close);
+
+                                setting.mxTrCSPAT00600.call_request(shcode, quantity.ToString(), close, "2", "[매수]", hname);
+                            }
+                        }
+                    }
+                    #endregion
+
+                    #region 매도 주문
+                    else if (divide == "매도")
+                    {
+                        for (int iRow = 0; iRow < mfTrading.GridAccount.Rows.Count; iRow++)
+                        {
+                            if (shcode == mfTrading.GridAccount.Rows[iRow].Cells[0].Value.ToString())
+                            {
+                                string quantity = mfTrading.GridAccount.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhAccount["수량"].GetValue())].Value.ToString();
+
+                                if (quantity != "0")
+                                {
+                                    string rate = mfTrading.GridAccount.Rows[iRow].Cells[Convert.ToInt32(mfTrading.mhAccount["수익율"].GetValue())].Value.ToString();
+
+                                    // 종목검색 매도 옵션 사용 유무
+                                    if (setting.sell_1833_yn)
+                                    {
+                                        if (setting.sell_fix_buffer <= Convert.ToDouble(rate))
+                                        {
+                                            setting.mxTrCSPAT00600.call_request(shcode, quantity, close, "1", "[매도] 종목검색[이익실현] :: " + mFileName, hname);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        setting.mxTrCSPAT00600.call_request(shcode, quantity, close, "1", "[매도] 종목검색[단순] :: " + mFileName, hname);
+                                    }
+                                }
+
+                                break;
+                            }
+                        }
+                    }
+                    #endregion
+                }	// end for
+            }
+        }
 	}	// end class
 }	// end namespace
