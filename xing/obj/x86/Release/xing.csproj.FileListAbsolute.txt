@@ -124,3 +124,27 @@ D:\xingAudoTradingProject\xing\obj\x86\Release\xing.cs.form.FormTrading.resource
 D:\xingAudoTradingProject\xing\obj\x86\Release\xing.FormMain.resources
 D:\xingAudoTradingProject\xing\obj\x86\Release\xing.Properties.Resources.resources
 D:\xingAudoTradingProject\xing\obj\x86\Release\xing.csproj.GenerateResource.Cache
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\bin\x86Release\xing.exe.config
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\Interop.XA_DATASETLib.dll
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\Interop.XA_SESSIONLib.dll
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.csproj.ResolveComReference.cache
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.exe
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.pdb
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\bin\x86Release\xing.exe
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\bin\x86Release\xing.pdb
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\bin\x86Release\Interop.MODI.dll
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\bin\x86Release\Interop.XA_DATASETLib.dll
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\bin\x86Release\Interop.XA_SESSIONLib.dll
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.csprojResolveAssemblyReference.cache
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\Interop.MODI.dll
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.cs.form.FormLog.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.cs.form.FormLogin.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.cs.form.FormSetting.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.cs.form.FormTrading.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\OCRmodule_20150409.frmCaptureBox.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\OCRmodule_20150409.frmMain.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.FormMain.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.Properties.Resources.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.csproj.GenerateResource.Cache
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.cs.form.frmCaptureBox.resources
+C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\AutoTradingSystem\xing\obj\x86\Release\xing.cs.form.frmMain.resources

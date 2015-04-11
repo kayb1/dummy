@@ -118,6 +118,18 @@
     <Compile Include="cs\form\FormTrading.Designer.cs">
       <DependentUpon>FormTrading.cs</DependentUpon>
     </Compile>
+    <Compile Include="cs\form\FormOcrCaptureBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cs\form\FormOcrCaptureBox.designer.cs">
+      <DependentUpon>FormOcrCaptureBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\form\FormOcrMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cs\form\FormOcrMain.designer.cs">
+      <DependentUpon>FormOcrMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="cs\log\Log.cs" />
     <Compile Include="cs\util\util_datetime.cs" />
     <Compile Include="cs\util\util_system_time.cs" />
@@ -157,6 +169,12 @@
     <EmbeddedResource Include="cs\form\FormTrading.resx">
       <DependentUpon>FormTrading.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\form\FormOcrCaptureBox.resx">
+      <DependentUpon>FormOcrCaptureBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\form\FormOcrMain.resx">
+      <DependentUpon>FormOcrMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -224,6 +242,15 @@
     <Content Include="bin\Release\Release Note.txt" />
   </ItemGroup>
   <ItemGroup>
+    <COMReference Include="MODI">
+      <Guid>{A5EDEDF4-2BBC-45F3-822B-E60C278A1A79}</Guid>
+      <VersionMajor>12</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="XA_DATASETLib">
       <Guid>{CAA15009-CF22-4D1D-AF40-093DBC5A6A0F}</Guid>
       <VersionMajor>1</VersionMajor>
