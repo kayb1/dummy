@@ -62,6 +62,8 @@ namespace xing
 
         /// <summary>당일 종목별 계산 정보들(한번만 계산) - {종목코드:"60고가","60저가" ... }</summary>
         public JsonObjectCollection mT1833Json;
+        /// <summary>당일 종목별 피보나치 해당 여부 - {종목코드:"true or false" }</summary>
+        public JsonObjectCollection mPiboJson;
 
 		/// <summary>
 		/// 생성자 - 종목검색
@@ -122,7 +124,7 @@ namespace xing
                 {
                     // json 초기화
                     mT1833Json = new JsonObjectCollection();
-
+                    mPiboJson = new JsonObjectCollection();
                     Log.WriteLine("t1833 종목 계산 정보 json 초기화 :: " + ex.Message);
                 }
             }
@@ -131,6 +133,7 @@ namespace xing
             {
                 // json 초기화
                 mT1833Json = new JsonObjectCollection();
+                mPiboJson = new JsonObjectCollection();
 
                 // 설정파일에 금일 날짜값 저장
                 Properties.Settings.Default.T1833_DATE = date_now;
@@ -337,7 +340,8 @@ namespace xing
                 {
                     continue;
                 }
-                else if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] != null)
+                // 피보나치 매매이고 고/저 완료 종목이나 아직 피보나치에 들지 않았을때
+                else if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] != null && mPiboJson[shcode] == null)
                 {
                     string[] arr1833 = mT1833Json[shcode].GetValue().ToString().Split('|');
                     int high = Convert.ToInt32(arr1833[0]);
@@ -366,6 +370,10 @@ namespace xing
                     if (!isPibonacci)
                     {
                         continue;
+                    }
+                    else
+                    {
+                        mPiboJson.Add(new JsonStringValue(shcode, "true"));
                     }
                 }
 
@@ -419,7 +427,7 @@ namespace xing
                     string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
                     string diff = mTr.GetFieldData("t1833OutBlock1", "diff", i);
 
-                    if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] == null)
+                    if (String.Compare(logicName, "피보나치") == 0 && mPiboJson[shcode] == null)
                     {
                         continue;
                     }
@@ -466,7 +474,7 @@ namespace xing
                     string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
                     string volume = mTr.GetFieldData("t1833OutBlock1", "volume", i);
 
-                    if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] == null)
+                    if (String.Compare(logicName, "피보나치") == 0 && mPiboJson[shcode] == null)
                     {
                         continue;
                     }
