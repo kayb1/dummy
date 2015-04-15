@@ -131,6 +131,7 @@
       <DependentUpon>FormTrading.cs</DependentUpon>
     </Compile>
     <Compile Include="cs\log\Log.cs" />
+    <Compile Include="cs\util\Stock.cs" />
     <Compile Include="cs\util\util_datetime.cs" />
     <Compile Include="cs\util\util_system_time.cs" />
     <Compile Include="cs\util\setting.cs" />

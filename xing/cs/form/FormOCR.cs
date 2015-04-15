@@ -66,7 +66,7 @@ namespace xing.cs.form
             #endregion
 
             #region OCR 인식
-            MODI.Document md = new MODI.Document();            
+            MODI.Document md = new MODI.Document();
             string strText = "";
             try
             {
@@ -95,27 +95,32 @@ namespace xing.cs.form
                 md.Close(false);
             }
             finally
-            {                
+            {
                 md.Close(false);
             }
             #endregion
 
             #region 텍스트 보정
-            strText = strText.Replace("o", "0");
-            strText = strText.Replace("O", "0");
+            if (strText.Length > 0)
+            {
+                strText = strText.Replace("o", "0");
+                strText = strText.Replace("O", "0");
 
-            strText = strText.Replace("l", "1");
-            strText = strText.Replace("i", "1");
-            strText = strText.Replace("I", "1");
+                strText = strText.Replace("l", "1");
+                strText = strText.Replace("i", "1");
+                strText = strText.Replace("I", "1");
 
-            strText = strText.Replace("s", "5");
-            strText = strText.Replace("S", "5");
+                strText = strText.Replace("s", "5");
+                strText = strText.Replace("S", "5");
 
-            //숫자가 아니면 제거하자
-            strText = removeExceptNumberAndNewLine(strText);
+                //숫자가 아니면 제거하자
+                strText = removeExceptNumberAndNewLine(strText);
 
-            strText = strText.Replace("\n", SPLIT);
-            HHLog("변환결과 : " + strText);
+                strText = strText.Replace("\n", SPLIT);
+                
+                Stock.strRecognizedCode = strText;
+                HHLog("변환결과 : " + strText);
+            }
             #endregion
 
             mNumOfFile++;

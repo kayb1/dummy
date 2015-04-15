@@ -85,8 +85,7 @@ namespace xing
 
 				#endregion
 
-				#region 현재 프로그램 정보 확인 및 세팅
-
+				#region 현재 프로그램 정보 확인 및 세팅                
 				// 프로그램 경로
 				setting.program_execute_dir = Util.GetCurrentDirectoryWithPath();
 
@@ -130,7 +129,7 @@ namespace xing
                 mfOcr.Owner = this;
                 mfOcr.mFormMain = this;
                 mfOcr.Show();
-                CheckShowFormLogin.Checked = true;
+                CheckShowFormOcr.Checked = true;
 
 				#endregion
 
@@ -611,9 +610,31 @@ namespace xing
 			}
 		}
 
-
+        /// <summary>
+        /// 설정 창 보기 체크박스
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckShowFormOcr_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckShowFormOcr.Checked)
+                {
+                    mfOcr.Show();
+                }
+                else
+                {
+                    mfOcr.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.WriteLine(ex.Message);
+                Log.WriteLine(ex.StackTrace);
+            }
+        }
 		
-
 		/// <summary>트레이로 이동 버튼 클릭</summary>
 		private void ButtonTrayTo_Click(object sender, EventArgs e)
 		{
