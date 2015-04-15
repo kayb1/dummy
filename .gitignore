@@ -1,2 +1,4 @@
-/xing/bin
 /xing/obj
+/xing/bin/x86Release/*.exe
+/xing/bin/x86Release/*.config
+/xing/bin/x86Release/*.pdb

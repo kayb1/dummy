@@ -1,0 +1,9 @@
+15:41:07.795 :: ##### 프로그램 시작 #####
+15:41:07.830 :: 'D:\xingAudoTradingProject\xing\bin\x86Release\t1833_dir' 경로의 일부를 찾을 수 없습니다.
+15:41:07.920 ::    위치: System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   위치: System.IO.Directory.InternalGetFileDirectoryNames(String path, String userPathOriginal, String searchPattern, Boolean includeFiles, Boolean includeDirs, SearchOption searchOption)
+   위치: System.IO.DirectoryInfo.GetFiles(String searchPattern, SearchOption searchOption)
+   위치: System.IO.DirectoryInfo.GetFiles()
+   위치: xing.cs.form.FormSetting.fnLoad1833FileList() 파일 d:\xingAudoTradingProject\xing\cs\form\FormSetting.cs:줄 501
+   위치: xing.cs.form.FormSetting..ctor() 파일 d:\xingAudoTradingProject\xing\cs\form\FormSetting.cs:줄 30
+   위치: xing.FormMain.FormMain_Load(Object sender, EventArgs e) 파일 d:\xingAudoTradingProject\xing\FormMain.cs:줄 109
