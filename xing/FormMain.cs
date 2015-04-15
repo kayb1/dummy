@@ -108,6 +108,7 @@ namespace xing
 				// 환경설정 폼
 				mfSetting = new FormSetting();
 				mfSetting.Owner = this;
+                mfSetting.mfMain = this;
 				mfSetting.Show();
 				CheckShowFormSetting.Checked = true;
 
@@ -390,6 +391,10 @@ namespace xing
 
 				// 현물계좌 증거금별 주문가능 수량 조회
 				setting.mxTrCSPBQ00200 = new xing_tr_CSPBQ00200();
+
+                // 멀티현재가 - ocr로 얻어온 종목코드로 현재가 불러와 매수처리전용 
+                setting.mxTr8407_kiwum = new xing_tr_8407_kiwum();
+                setting.mxTr8407_kiwum.mfTrading = mfTrading;
 			}
 			catch (Exception ex)
 			{

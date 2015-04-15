@@ -21,6 +21,8 @@ namespace xing.cs.form
         private Boolean mIsProcessing;
         private MODI.MiLANGUAGES mLangType;
 
+        private string strRecognizedCode;
+
         public FormOCR()
         {
             InitializeComponent();
@@ -118,8 +120,22 @@ namespace xing.cs.form
 
                 strText = strText.Replace("\n", SPLIT);
                 
-                Stock.strRecognizedCode = strText;
+                strRecognizedCode = strText;
                 HHLog("변환결과 : " + strText);
+
+                string[] arr8407 = strText.Split('/');
+                strText = strText.Replace("/", "");
+                int count = arr8407.Length;
+                if (count > 0)
+                {
+                    count -= 1;
+                }
+
+                if (count > 0)
+                {
+                    Log.WriteLine("ocr " + count + " " + strText);
+                    setting.mxTr8407_kiwum.call_request(count.ToString(), strText);
+                }
             }
             #endregion
 
@@ -138,7 +154,7 @@ namespace xing.cs.form
             {
                 timer.Enabled = true;
 
-                mFrmCaptureBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                //mFrmCaptureBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
                 btnOcrStart.Enabled = false;
                 gbxTimerSetting.Enabled = false;
                 btnOcrEnd.Enabled = true;
@@ -151,7 +167,7 @@ namespace xing.cs.form
             {
                 timer.Enabled = false;
 
-                mFrmCaptureBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+                //mFrmCaptureBox.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
                 btnOcrStart.Enabled = true;
                 gbxTimerSetting.Enabled = true;
                 btnOcrEnd.Enabled = false;

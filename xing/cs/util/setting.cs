@@ -213,6 +213,8 @@ namespace xing
 		/// <summary>현물계좌 증거금별 주문가능 수량 조회</summary>
 		public static xing_tr_CSPBQ00200 mxTrCSPBQ00200;
 
+        /// <summary>주식 멀티현재가 - ocr로 얻어온 종목코드로 현재가 불러와 매수처리전용</summary>
+        public static xing_tr_8407_kiwum mxTr8407_kiwum;
 
 		#endregion
 

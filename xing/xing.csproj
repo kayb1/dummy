@@ -126,11 +126,11 @@
       <DependentUpon>FormTrading.cs</DependentUpon>
     </Compile>
     <Compile Include="cs\log\Log.cs" />
-    <Compile Include="cs\util\Stock.cs" />
     <Compile Include="cs\util\util_datetime.cs" />
     <Compile Include="cs\util\util_system_time.cs" />
     <Compile Include="cs\util\setting.cs" />
     <Compile Include="cs\xing\tr\xing_tr_0167.cs" />
+    <Compile Include="cs\xing\tr\xing_tr_8407_kiwum.cs" />
     <Compile Include="cs\xing\tr\xing_tr_8407.cs" />
     <Compile Include="cs\xing\tr\xing_tr_0425.cs" />
     <Compile Include="cs\xing\tr\xing_tr_8413.cs" />

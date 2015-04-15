@@ -10,13 +10,12 @@ using System.Windows.Forms;
 using System.Net.Json;
 
 using XA_DATASETLib;
-
-using System.Collections;
 using xing.cs.form;
+using System.Collections;
 
 namespace xing
 {
-	public class xing_tr_1833 : _IXAQueryEvents
+	public class xing_tr_8407_kiwum : _IXAQueryEvents
 	{
 		/// <summary>xing component</summary>
 		private IXAQuery mTr;
@@ -24,58 +23,35 @@ namespace xing
 		/// <summary>Trading 폼 참조</summary>
 		public FormTrading mfTrading;
 
-		/// <summary>설정 폼 참조</summary>
-		public FormSetting mfSetting;
-
-		/// <summary>이탈 종목 구분을 위함 - {종목코드:"거래량", ... }</summary>
-		public JsonObjectCollection mJson;	
-
-		/// <summary>종목검색 파일이 들어있는 폴더 경로</summary>
-		public string mFilePath = "";
-
-		/// <summary>21-장중 종목검색을 위한 파일 목록</summary>
-		public ArrayList mFile21 = new ArrayList();
-
-		/// <summary>21-장중 종목검색시 현재 인덱스</summary>
-		public int mFile21Index = 0;
-
-		/// <summary>22-장전 동시호가 종목검색을 위한 파일 목록</summary>
-		public ArrayList mFile22 = new ArrayList();
-
-		/// <summary>22-장전 동시호가 종목검색시 현재 인덱스</summary>
-		public int mFile22Index = 0;
-
-		/// <summary>42-장마감 동시호가 종목검색을 위한 파일 목록</summary>
-		public ArrayList mFile42 = new ArrayList();
-
-		/// <summary>42-장마감 동시호가 종목검색시 현재 인덱스</summary>
-		public int mFile42Index = 0;
-
-		/// <summary>현재 종목 검색중인 파일명</summary>
-		private string mFileName = "";
-
 		/// <summary>현재 TR이 실행중인지 여부</summary>
 		private bool mStateRun = false;
 
 		/// <summary>현재 TR이 실행중일 동안 카운트 수</summary>
 		private int mStateRunCount = 0;
 
-        /// <summary>당일 종목별 계산 정보들(한번만 계산) - {종목코드:"60고가","60저가" ... }</summary>
-        public JsonObjectCollection mT1833Json;
-        /// <summary>당일 종목별 피보나치 해당 여부 - {종목코드:"true or false" }</summary>
-        public JsonObjectCollection mPiboJson;
+		/// <summary>잔고 종목의 매도시 필요한 정보 저장 - {종목코드:"최종변경시간", ... }</summary>
+		public JsonObjectCollection mJson;
+
+        /// <summary>21-장중 종목검색을 위한 파일 목록</summary>
+        public ArrayList mFile21 = new ArrayList();
+
+        /// <summary>21-장중 종목검색시 현재 인덱스</summary>
+        public int mFile21Index = 0;
+
+        /// <summary>현재 종목 검색중인 파일명</summary>
+        private string mFileName = "";
 
 		/// <summary>
-		/// 생성자 - 종목검색
+		/// 생성자 - 멀티현재가
 		/// </summary>
-		public xing_tr_1833()
+        public xing_tr_8407_kiwum()
 		{
 			IConnectionPoint icp;
 			IConnectionPointContainer icpc;
 
 			int iCookie = 0;
 			mTr = new XAQuery();
-			mTr.ResFileName = "\\res\\t1833.res";
+			mTr.ResFileName = "\\res\\t8407.res";
 			icpc = (IConnectionPointContainer)mTr;
 			Guid IID_QueryEvents = typeof(_IXAQueryEvents).GUID;
 			icpc.FindConnectionPoint(ref IID_QueryEvents, out icp);
@@ -84,65 +60,20 @@ namespace xing
 			// json 초기화
 			mJson = new JsonObjectCollection();
 
-			#region 1833 종목 검색을 위한 파일 설정 로딩
+            #region 8407 종목 검색을 위한 파일 설정 로딩
 
-			string[] files = setting.t1833_files.Split('■');
+            string[] files = setting.t1833_files.Split('■');
 
-			foreach (string filename in files)
-			{
-				if (filename.IndexOf("21_") == 0)
-				{
-					mFile21.Add(filename);
-				}
-				else if (filename.IndexOf("22_") == 0)
-				{
-					mFile22.Add(filename);
-				}
-				else if (filename.IndexOf("42_") == 0)
-				{
-					mFile42.Add(filename);
-				}
-			}
-
-			#endregion
-
-            #region 1833 종목 검색후 당일 종목마다 가지고 있어야할 종목 정보 처리
-
-            string date_saved = Properties.Settings.Default.T1833_DATE;
-            string date_now = util_datetime.GetFormatNow("yyyyMMdd");
-
-            // 오늘 프로그램이 실행된적이 있다면...
-            if (date_now == date_saved)
+            foreach (string filename in files)
             {
-                // 설정파일에 저장된 값을 로딩				
-                try
+                if (filename.IndexOf("21_") == 0)
                 {
-                    mT1833Json = (JsonObjectCollection)new JsonTextParser().Parse(Properties.Settings.Default.T1833_JSON);
+                    mFile21.Add(filename);
                 }
-                // 설정 파일에 잘못된 json 값이 들어가 있을 경우 예외 처리
-                catch (Exception ex)
-                {
-                    // json 초기화
-                    mT1833Json = new JsonObjectCollection();
-                    mPiboJson = new JsonObjectCollection();
-                    Log.WriteLine("t1833 종목 계산 정보 json 초기화 :: " + ex.Message);
-                }
-            }
-            // 오늘 처음 실행되는 것이라면..
-            else
-            {
-                // json 초기화
-                mT1833Json = new JsonObjectCollection();
-                mPiboJson = new JsonObjectCollection();
-
-                // 설정파일에 금일 날짜값 저장
-                Properties.Settings.Default.T1833_DATE = date_now;
-                Properties.Settings.Default.Save();
             }
 
             #endregion
-        
-        }	// end function
+		}	// end function
 
 
 		/// <summary>
@@ -153,68 +84,33 @@ namespace xing
 		{
             try
             {
-				// 증거금 100% 종목 매입가능 금액
-				double iCost100 = setting.mxTrCSPAQ02200.m100;
+                // 증거금 100% 종목 매입가능 금액
+                double iCost100 = setting.mxTrCSPAQ02200.m100;
 
-				// 그리드 초기화
-				//mfTrading.GridBuy.Rows.Clear();
+                int iCount = mTr.GetBlockCount("t8407OutBlock1");
 
-				// 서버에서 받은 응답 결과를 디비에 저장
-				int iCount = mTr.GetBlockCount("t1833OutBlock1");
-
-				// 파일명에서 매수/매도 구분값 가져옴
-				string divide = mFileName.Substring(3, 2);
+                // 파일명에서 매수/매도 구분값 가져옴
+                string divide = mFileName.Substring(3, 2);
 
                 // 파일명에서 이름 구분값 가져옴
-                string logicName = mFileName.Substring(6, 4);
-                string logicName2 = mFileName.Substring(6, 2);
-                if (String.Compare(logicName, "피보나치") == 0)
+                string logicName = mFileName.Substring(6, 2);
+                if (String.Compare(logicName, "키움") == 0)
                 {
-                    for (int i = 0; i < iCount; i++)
-                    {
-                        string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
-                        string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
-                        if (mT1833Json[shcode] == null)
-                        {
-                            try
-                            {
-                                // 주식 차트 요청
-                                setting.mxTr8413.call_request(shcode);
-                                //Log.WriteLine("주식차트 요청 " + hname + " " + shcode);
-                            }
-                            catch (Exception ex)
-                            {
-                                Log.WriteLine(ex.Message);
-                                Log.WriteLine(ex.StackTrace);
-                            }
-
-                            break;
-                        }
-                    }
-
                     shBuyAndSell(iCount, divide, iCost100, logicName);
-                }
-                else if (String.Compare(logicName2, "키움") == 0)
-                {
-                    // pass
                 }
                 else
                 {
-                    shBuyAndSell(iCount, divide, iCost100, logicName);
+                    // pass
                 }
-
-                
 
 				// 다시 실행가능하도록 초기화
 				mStateRun = false;
 				mStateRunCount = 0;
-
-				mFileName = "";
             }
             catch (Exception ex)
             {
-				Log.WriteLine(ex.Message);
-				Log.WriteLine(ex.StackTrace);
+                Log.WriteLine(ex.Message);
+                Log.WriteLine(ex.StackTrace);
             }
 		}	// end function
 
@@ -231,7 +127,7 @@ namespace xing
             {
                 if (nMessageCode != "00000")
                 {
-                    //Log.WriteLine("t1833 :: " + nMessageCode + " :: " + szMessage);
+					//Log.WriteLine("t8407 :: " + nMessageCode + " :: " + szMessage);
                 }
             }
             catch (Exception ex)
@@ -247,9 +143,11 @@ namespace xing
         }	// end function
 
 		/// <summary>
-		/// 종목검색 호출
+		/// 멀티현재가 검색 호출
 		/// </summary>
-		public void call_request()
+		/// <param name="nrec">검색 종목 수 - 최대 50건</param>
+		/// <param name="shcode">종복번호 병합한 거</param>
+		public void call_request(string nrec, string shcodes)
 		{
 			// 응답 결과를 아직 실행중이라면
 			if (mStateRun)
@@ -267,83 +165,40 @@ namespace xing
 			// 정상적으로 응답 처리가 끝난 상태라면 다시 호출을 시도
 			else
 			{
-				mStateRun = true;
-
-				string jstatus = setting.mxRealJif.mjstatus;
-				string filename = "";
-
-				// 장중
-				/*if (jstatus == "21")
+				if (shcodes != "")
 				{
-					if (mFile21.Count >= 1)
-					{
-						if (mFile21Index == mFile21.Count)
-						{
-							mFile21Index = 0;
-						}
+					mStateRun = true;
 
-						filename = mFile21[mFile21Index++].ToString();
-					}
-				}
-				// 장전 동시호가
-				else if ("22,23,24,25,11".IndexOf(jstatus) >= 0)
-				{
-					if (mFile22.Count >= 1)
-					{
-						if (mFile22Index == mFile22.Count)
-						{
-							mFile22Index = 0;
-						}
+					mTr.SetFieldData("t8407InBlock", "nrec", 0, nrec);
+					mTr.SetFieldData("t8407InBlock", "shcode", 0, shcodes);
 
-						filename = mFile22[mFile22Index++].ToString();
-					}
-				}
-				// 장마감 동시호가
-				else if ("42,43,44,31".IndexOf(jstatus) >= 0)
-				{
-					if (mFile42.Count >= 1)
-					{
-						if (mFile42Index == mFile42.Count)
-						{
-							mFile42Index = 0;
-						}
+					mTr.Request(false);
 
-						filename = mFile42[mFile42Index++].ToString();
-					}
-				}*/
+                    string jstatus = setting.mxRealJif.mjstatus;
+                    string filename = "";
 
-                if (mFile21.Count >= 1) // 상태에 상관없이 종목은 항상 검색 시도
-                {
-                    if (mFile21Index == mFile21.Count)
+                    if (mFile21.Count >= 1) // 상태에 상관없이 종목은 항상 검색 시도
                     {
-                        mFile21Index = 0;
+                        if (mFile21Index == mFile21.Count)
+                        {
+                            mFile21Index = 0;
+                        }
+
+                        filename = mFile21[mFile21Index++].ToString();
                     }
 
-                    filename = mFile21[mFile21Index++].ToString();
-                }
-
-				// 종목검색 호출
-				if (filename != "")
-				{
-					mFileName = filename;
-
-                    // 파일명에서 매수/매도 구분값 가져옴
-                    string divide = mFileName.Substring(3, 2);
-
-                    // 파일명에서 이름 구분값 가져옴
-                    string logicName = mFileName.Substring(6, 2);
-                    if (String.Compare(logicName, "키움") == 0)
+                    // 종목검색 호출
+                    if (filename != "")
                     {
-                        Log.WriteLine("1833 패스");
-                        return;
+                        mFileName = filename;
+                        mfTrading.Group1833.Text = filename;
                     }
-					mfTrading.Group1833.Text = filename;
+                    else
+                    {
+                        mfTrading.Group1833.Text = "종목검색 중지";
+                    }
 
-					mTr.RequestService("t1833", setting.t1833_dir + filename);
-				}
-				else
-				{
-					mfTrading.Group1833.Text = "종목검색 중지";
+//					Log.WriteLine("call_request 8407 :: " + nrec.ToString());
 				}
 			}
 		}	// end function
@@ -352,52 +207,13 @@ namespace xing
         {
             for (int i = 0; i < iCount; i++)
             {
-                string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
-                string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
-                string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
-                string volume = mTr.GetFieldData("t1833OutBlock1", "volume", i);
-                string diff = mTr.GetFieldData("t1833OutBlock1", "diff", i);
+                string shcode = mTr.GetFieldData("t8407OutBlock1", "shcode", i);
+                string hname = mTr.GetFieldData("t8407OutBlock1", "hname", i);
+                string close = mTr.GetFieldData("t8407OutBlock1", "price", i);
+                string volume = mTr.GetFieldData("t8407OutBlock1", "volume", i);
+                string diff = mTr.GetFieldData("t8407OutBlock1", "diff", i);
 
-                if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] == null)
-                {
-                    continue;
-                }
-                // 피보나치 매매이고 고/저 완료 종목이나 아직 피보나치에 들지 않았을때
-                else if (String.Compare(logicName, "피보나치") == 0 && mT1833Json[shcode] != null && mPiboJson[shcode] == null)
-                {
-                    string[] arr1833 = mT1833Json[shcode].GetValue().ToString().Split('|');
-                    int high = Convert.ToInt32(arr1833[0]);
-                    int low = Convert.ToInt32(arr1833[1]);
-                    int realOpen = Convert.ToInt32(arr1833[2]);
-
-                    // 피보나치 되돌림
-                    double p236 = (double)high - (double)(high - low) * 0.236;
-                    double p382 = (double)high - (double)(high - low) * 0.382;
-                    double p50 = (double)high - (double)(high - low) * 0.5;
-                    double p618 = (double)high - (double)(high - low) * 0.618;
-
-                    int realClose = Convert.ToInt32(close);
-                    bool isPibonacci = false;
-                    if (realOpen > realClose && ((realOpen > p236 * 1.01 && realClose < p236 * 1.003) ||
-                        (realOpen > p382 * 1.01 && realClose < p382 * 1.003) ||
-                        (realOpen > p50 * 1.01 && realClose < p50 * 1.003) ||
-                        (realOpen > p618 * 1.01 && realClose < p618 * 1.003)))
-                    {
-                        //Log.WriteLine("t1833 주문가능 " + hname + " " + shcode + " " + high + " " + low + " " + realOpen + " " + realClose + " " + (p236 * 1.003) + " " + (p382 * 1.003) + " " + (p50 * 1.003) + " " + (p618 * 1.003));
-                        isPibonacci = true;
-                    }
-
-                    //Log.WriteLine("t1833 주문가능 " + hname + " " + shcode + " " + high + " " + low + " " + close + " " + isPibo);
-
-                    if (!isPibonacci)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        mPiboJson.Add(new JsonStringValue(shcode, "true"));
-                    }
-                }
+                Log.WriteLine("키움키움키움 " + shcode + " " + hname);
 
                 // json에 저장된 종목정보 가져 옴
                 JsonObject obj = mJson[shcode];
@@ -444,15 +260,10 @@ namespace xing
                 string tempRate = "";
                 for (int i = 0; i < iCount; i++)
                 {
-                    string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
-                    string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
-                    string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
-                    string diff = mTr.GetFieldData("t1833OutBlock1", "diff", i);
-
-                    if (String.Compare(logicName, "피보나치") == 0 && mPiboJson[shcode] == null)
-                    {
-                        continue;
-                    }
+                    string shcode = mTr.GetFieldData("t8407OutBlock1", "shcode", i);
+                    string hname = mTr.GetFieldData("t8407OutBlock1", "hname", i);
+                    string close = mTr.GetFieldData("t8407OutBlock1", "price", i);
+                    string diff = mTr.GetFieldData("t8407OutBlock1", "diff", i);
 
                     if (string.Compare(curHname, hname) == 0)
                     {
@@ -491,15 +302,10 @@ namespace xing
             {
                 for (int i = 0; i < iCount; i++)
                 {
-                    string shcode = mTr.GetFieldData("t1833OutBlock1", "shcode", i);
-                    string hname = mTr.GetFieldData("t1833OutBlock1", "hname", i);
-                    string close = mTr.GetFieldData("t1833OutBlock1", "close", i);
-                    string volume = mTr.GetFieldData("t1833OutBlock1", "volume", i);
-
-                    if (String.Compare(logicName, "피보나치") == 0 && mPiboJson[shcode] == null)
-                    {
-                        continue;
-                    }
+                    string shcode = mTr.GetFieldData("t8407OutBlock1", "shcode", i);
+                    string hname = mTr.GetFieldData("t8407OutBlock1", "hname", i);
+                    string close = mTr.GetFieldData("t8407OutBlock1", "price", i);
+                    string volume = mTr.GetFieldData("t8407OutBlock1", "volume", i);
 
                     // 일괄 매도중이면.. 패쓰~~
                     // 매수 종목된 항목 정보는 보기 위해 continue 사용
@@ -663,6 +469,6 @@ namespace xing
                     #endregion
                 }	// end for
             }
-        }
+        }// end function
 	}	// end class
 }	// end namespace

@@ -12,6 +12,9 @@ namespace xing.cs.form
 {
 	public partial class FormSetting : Form
 	{
+        /// <summary>메인 폼 참조시 사용</summary>
+        public FormMain mfMain;
+
 		public FormSetting()
 		{
 			InitializeComponent();
@@ -251,6 +254,9 @@ namespace xing.cs.form
 						setting.t1833_files += filename + "■";
 					}
 				}
+
+                // 그리드 초기화
+                mfMain.mfTrading.GridBuy.Rows.Clear();
 
 				Properties.Settings.Default.T1833_FILES = setting.t1833_files;
 
