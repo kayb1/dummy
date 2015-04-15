@@ -29,12 +29,6 @@ namespace xing
 		/// <summary>Trading 폼</summary>
 		public FormTrading mfTrading;
 
-        /// <summary>ocr 폼</summary>
-        public FormOcrCaptureBox mfOcrCaptureBox;
-
-        /// <summary>캡쳐 폼</summary>
-        public FormOcrMain mfOcrMain;
-
 		/// <summary>
 		/// 메인 폼 생성자
 		/// </summary>
@@ -127,18 +121,6 @@ namespace xing
 				mfLogin.mFormMain = this;
 				mfLogin.Show();
 				CheckShowFormLogin.Checked = true;
-
-                // OCR 캡쳐 폼
-                mfOcrCaptureBox = new FormOcrCaptureBox();
-                mfOcrCaptureBox.Owner = this;
-                mfOcrCaptureBox.mFormMain = this;
-                mfOcrCaptureBox.Show();                
-
-                // OCR 메인 폼
-                mfOcrMain = new FormOcrMain();
-                mfOcrMain.Owner = this;
-                mfOcrMain.mFormMain = this;
-                mfOcrMain.Show();
 
 				#endregion
 
