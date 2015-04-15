@@ -94,6 +94,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cs\form\FormCaptureBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cs\form\FormCaptureBox.Designer.cs">
+      <DependentUpon>FormCaptureBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="cs\form\FormLog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,12 @@
     </Compile>
     <Compile Include="cs\form\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cs\form\FormOCR.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cs\form\FormOCR.Designer.cs">
+      <DependentUpon>FormOCR.cs</DependentUpon>
     </Compile>
     <Compile Include="cs\form\FormSetting.cs">
       <SubType>Form</SubType>
@@ -142,6 +154,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="cs\form\FormCaptureBox.resx">
+      <DependentUpon>FormCaptureBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="cs\form\FormLog.resx">
       <DependentUpon>FormLog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -149,6 +164,9 @@
     <EmbeddedResource Include="cs\form\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cs\form\FormOCR.resx">
+      <DependentUpon>FormOCR.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="cs\form\FormSetting.resx">
       <DependentUpon>FormSetting.cs</DependentUpon>

@@ -29,6 +29,10 @@ namespace xing
 		/// <summary>Trading 폼</summary>
 		public FormTrading mfTrading;
 
+        /// <summary>OCR 폼</summary>
+        public FormOCR mfOcr;
+
+
 		/// <summary>
 		/// 메인 폼 생성자
 		/// </summary>
@@ -121,6 +125,12 @@ namespace xing
 				mfLogin.mFormMain = this;
 				mfLogin.Show();
 				CheckShowFormLogin.Checked = true;
+
+                mfOcr = new FormOCR();
+                mfOcr.Owner = this;
+                mfOcr.mFormMain = this;
+                mfOcr.Show();
+                CheckShowFormLogin.Checked = true;
 
 				#endregion
 
