@@ -16,7 +16,7 @@ namespace xing.cs.form
 
         private static readonly int NUM_OF_FILE = 2;
         private static readonly string SPLIT = "/";
-        private static readonly int IMAGE_SCALE_FACTOR = 2;        
+        private static readonly float IMAGE_SCALE_FACTOR = 2f;        
         private static readonly float DEFAULT_DPI = 4800f;
 
         private FormCaptureBox mFrmCaptureBox;
@@ -24,8 +24,6 @@ namespace xing.cs.form
         private Boolean mIsProcessing;
         private MODI.MiLANGUAGES mLangType;
         private string mOcrCharList;
-
-        private string strRecognizedCode;
 
         public FormOCR()
         {
@@ -81,7 +79,7 @@ namespace xing.cs.form
             // Code usage sample           
             using (Bitmap bmpOriginal = new Bitmap("c:\\test" + mNumOfFile + ".png", true)) {                
                 bmpOriginal.SetResolution(300f, 300f);                
-                using (Bitmap bmpFinal = new Bitmap(bmpOriginal, bmpOriginal.Width * IMAGE_SCALE_FACTOR, bmpOriginal.Height * IMAGE_SCALE_FACTOR))
+                using (Bitmap bmpFinal = new Bitmap(bmpOriginal, (int)(bmpOriginal.Width * IMAGE_SCALE_FACTOR), (int)(bmpOriginal.Height * IMAGE_SCALE_FACTOR)))
                 {                    
                     bmpFinal.SetResolution(DEFAULT_DPI, DEFAULT_DPI);               
                     tessnet2.Tesseract tessocr = new tessnet2.Tesseract();
@@ -159,27 +157,27 @@ namespace xing.cs.form
             #region 텍스트 보정
             if (strText.Length > 0)
             {
-                strText = strText.Replace("o", "0");
-                strText = strText.Replace("O", "0");
+                //(MODI 일 경우에만 사용)
+                //strText = strText.Replace("o", "0");
+                //strText = strText.Replace("O", "0");
 
-                strText = strText.Replace("l", "1");
-                strText = strText.Replace("i", "1");
-                strText = strText.Replace("I", "1");
+                //strText = strText.Replace("l", "1");
+                //strText = strText.Replace("i", "1");
+                //strText = strText.Replace("I", "1");
 
-                strText = strText.Replace("s", "5");
-                strText = strText.Replace("S", "5");
+                //strText = strText.Replace("s", "5");
+                //strText = strText.Replace("S", "5");
 
-                //숫자가 아니면 제거하자
-                strText = removeExceptNumberAndNewLine(strText);
+                //숫자가 아니면 제거하자 
+                //strText = removeExceptNumberAndNewLine(strText);
+                //strText = strText.Replace("\n", SPLIT);
 
-                strText = strText.Replace("\n", SPLIT);
-
-                strRecognizedCode = strText;
                 HHLog("변환결과 : " + strText);
 
-                string[] arr8407 = strText.Split('/');
-                strText = strText.Replace("/", "");
-                int count = arr8407.Length;
+                //string[] arr8407 = strText.Split('/');
+                //strText = strText.Replace("/", "");
+                //int count = arr8407.Length;
+                int count = strText.Length / 6;
                 if (count > 0)
                 {
                     count -= 1;
