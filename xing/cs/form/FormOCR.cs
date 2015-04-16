@@ -16,10 +16,14 @@ namespace xing.cs.form
 
         private static readonly int NUM_OF_FILE = 2;
         private static readonly string SPLIT = "/";
+        private static readonly int IMAGE_SCALE_FACTOR = 2;        
+        private static readonly float DEFAULT_DPI = 4800f;
+
         private FormCaptureBox mFrmCaptureBox;
         private int mNumOfFile;
         private Boolean mIsProcessing;
         private MODI.MiLANGUAGES mLangType;
+        private string mOcrCharList;
 
         private string strRecognizedCode;
 
@@ -32,6 +36,8 @@ namespace xing.cs.form
             mNumOfFile = 0;
             mIsProcessing = false;
             mLangType = MODI.MiLANGUAGES.miLANG_ENGLISH;
+            mOcrCharList = "0123456789";
+            //mOcrCharList = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,$-/#&=()\"':?";
 
             #region 폼 초기위치 설정
             //현재는 화면 왼쪽 하단에 위치하도록
@@ -54,8 +60,9 @@ namespace xing.cs.form
             mIsProcessing = true;
 
             #region 캡쳐
-            Bitmap bitmap = new Bitmap(mFrmCaptureBox.PnCaptureBox.Width, mFrmCaptureBox.PnCaptureBox.Height);
+            Bitmap bitmap = new Bitmap(mFrmCaptureBox.PnCaptureBox.Width, mFrmCaptureBox.PnCaptureBox.Height);            
             Graphics g = Graphics.FromImage(bitmap);
+            g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
             g.CopyFromScreen(mFrmCaptureBox.PointToScreen(new Point(mFrmCaptureBox.PnCaptureBox.Location.X, mFrmCaptureBox.PnCaptureBox.Location.Y)), new Point(0, 0), mFrmCaptureBox.PnCaptureBox.Size);
 
             String path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -63,43 +70,90 @@ namespace xing.cs.form
             pbCurImage.SizeMode = PictureBoxSizeMode.Zoom;
             pbCurImage.Image = (Image)new Bitmap(bitmap);
 
-            bitmap.Save("c:\\test" + mNumOfFile + ".jpg", System.Drawing.Imaging.ImageFormat.Jpeg);
+            bitmap.Save("c:\\test" + mNumOfFile + ".png", System.Drawing.Imaging.ImageFormat.Png);
             bitmap.Dispose();
             #endregion
 
-            #region OCR 인식
-            MODI.Document md = new MODI.Document();
             string strText = "";
-            try
-            {
-                md.Create("c:\\test" + mNumOfFile + ".jpg");
-                md.OCR(mLangType, false, true);
+            //string strText2 = "";
 
-                MODI.Image mdImage = (MODI.Image)md.Images[0];
-                MODI.Layout mdLayout = mdImage.Layout;
-                //단어별로 구분할때는 아래코드 사용
-                /*for (int i = 0; i < mdLayout.Words.Count; i++)
-                {
-                    MODI.Word mdWord = (MODI.Word)mdLayout.Words[i];
-                    if (strText.Length > 0)
+            #region tessnet OCR
+            // Code usage sample           
+            using (Bitmap bmpOriginal = new Bitmap("c:\\test" + mNumOfFile + ".png", true)) {                
+                bmpOriginal.SetResolution(300f, 300f);                
+                using (Bitmap bmpFinal = new Bitmap(bmpOriginal, bmpOriginal.Width * IMAGE_SCALE_FACTOR, bmpOriginal.Height * IMAGE_SCALE_FACTOR))
+                {                    
+                    bmpFinal.SetResolution(DEFAULT_DPI, DEFAULT_DPI);               
+                    tessnet2.Tesseract tessocr = new tessnet2.Tesseract();
+                    tessocr.SetVariable("tessedit_char_whitelist", mOcrCharList);
+                    tessocr.Init(@"C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\dummy\xing\bin\x86Release\tessdata", "eng", false);
+                    List<tessnet2.Word> words = tessocr.DoOCR(bmpFinal, Rectangle.Empty);
+                    foreach (tessnet2.Word word in words)
                     {
-                        strText += " ";
+                        strText += word.Text;
                     }
-                    strText += mdWord.Text;
-                }*/
-                strText = mdLayout.Text;
-                HHLog("추출결과 : " + strText);
+                }                
             }
-            catch (Exception exception)
-            {
-                HHLog("문자추출실패 : " + exception.Message);
-                tbxLog.Invalidate();
-                md.Close(false);
-            }
-            finally
-            {
-                md.Close(false);
-            }
+
+            //using (Bitmap bmpOriginal = new Bitmap("c:\\test" + mNumOfFile + ".png", true))
+            //{
+            //    bmpOriginal.SetResolution(300f, 300f);
+            //    using (Bitmap bmpFinal = new Bitmap(bmpOriginal, bmpOriginal.Width * 3, bmpOriginal.Height * 3))
+            //    {
+            //        bmpFinal.SetResolution(DEFAULT_DPI, DEFAULT_DPI);
+            //        tessnet2.Tesseract tessocr = new tessnet2.Tesseract();
+            //        tessocr.SetVariable("tessedit_char_whitelist", mOcrCharList);
+            //        tessocr.Init(@"C:\Users\WMPRO1402\Documents\Visual Studio 2013\Projects\dummy\xing\bin\x86Release\tessdata", "eng", false);
+            //        List<tessnet2.Word> words = tessocr.DoOCR(bmpFinal, Rectangle.Empty);
+            //        foreach (tessnet2.Word word in words)
+            //        {
+            //            strText2 += word.Text;
+            //        }
+            //    }
+            //}
+            #endregion            
+
+            //if (strText.Equals(strText2))
+            //{
+            //    HHLog("같음");
+            //}
+            //else
+            //{
+            //    HHLog("다름:" + strText2);
+            //}
+
+            #region MODI OCR
+            //MODI.Document md = new MODI.Document();            
+            //try
+            //{
+            //    md.Create("c:\\test" + mNumOfFile + ".jpg");
+            //    md.OCR(mLangType, false, true);
+
+            //    MODI.Image mdImage = (MODI.Image)md.Images[0];
+            //    MODI.Layout mdLayout = mdImage.Layout;
+            //    //단어별로 구분할때는 아래코드 사용
+            //    /*for (int i = 0; i < mdLayout.Words.Count; i++)
+            //    {
+            //        MODI.Word mdWord = (MODI.Word)mdLayout.Words[i];
+            //        if (strText.Length > 0)
+            //        {
+            //            strText += " ";
+            //        }
+            //        strText += mdWord.Text;
+            //    }*/
+            //    strText = mdLayout.Text;
+            //    HHLog("추출결과 : " + strText);
+            //}
+            //catch (Exception exception)
+            //{
+            //    HHLog("문자추출실패 : " + exception.Message);
+            //    tbxLog.Invalidate();
+            //    md.Close(false);
+            //}
+            //finally
+            //{
+            //    md.Close(false);
+            //}
             #endregion
 
             #region 텍스트 보정
@@ -119,7 +173,7 @@ namespace xing.cs.form
                 strText = removeExceptNumberAndNewLine(strText);
 
                 strText = strText.Replace("\n", SPLIT);
-                
+
                 strRecognizedCode = strText;
                 HHLog("변환결과 : " + strText);
 
